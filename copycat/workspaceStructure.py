@@ -4,21 +4,21 @@ import formulas
 class WorkspaceStructure(object):
     def __init__(self):
         self.string = None
-        self.internalStrength = 0.0
-        self.externalStrength = 0.0
-        self.totalStrength = 0.0
+        self.internal_strength = 0.0
+        self.external_strength = 0.0
+        self.total_strength = 0.0
 
-    def updateStrength(self):
-        self.updateInternalStrength()
-        self.updateExternalStrength()
-        self.updateTotalStrength()
+    def update_strength(self):
+        self.update_internal_strength()
+        self.update_external_strength()
+        self.update_total_strength()
 
-    def updateTotalStrength(self):
+    def update_total_strength(self):
         """Recalculate the total strength based on internal and external strengths"""
-        weights = ((self.internalStrength, self.internalStrength), (self.externalStrength, 100 - self.internalStrength))
+        weights = ((self.internal_strength, self.internal_strength), (self.external_strength, 100 - self.internal_strength))
         strength = formulas.weightedAverage(weights)
-        self.totalStrength = strength
+        self.total_strength = strength
 
-    def totalWeakness(self):
+    def total_weakness(self):
         """The total weakness is derived from total strength"""
-        return 100 - self.totalStrength ** 0.95
+        return 100 - self.total_strength ** 0.95

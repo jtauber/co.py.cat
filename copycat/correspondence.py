@@ -100,19 +100,19 @@ class Correspondence(WorkspaceStructure):
             return 100.0
         if isinstance(self.objectFromTarget, Letter) and self.objectFromTarget.spansString():
             return 100.0
-        total = sum([c.totalStrength for c in workspace.correspondences() if self.supporting(c)])
+        total = sum([c.total_strength for c in workspace.correspondences() if self.supporting(c)])
         total = min(total, 100.0)
         return total
 
-    def updateInternalStrength(self):
+    def update_internal_strength(self):
         """A function of how many conceptMappings there are, their strength and how well they cohere"""
         relevantDistinguishingMappings = self.relevantDistinguishingConceptMappings()
         numberOfConceptMappings = len(relevantDistinguishingMappings)
         if numberOfConceptMappings < 1:
-            self.internalStrength = 0.0
+            self.internal_strength = 0.0
             return
-        totalStrength = sum([m.strength() for m in relevantDistinguishingMappings])
-        averageStrength = totalStrength / numberOfConceptMappings
+        total_strength = sum([m.strength() for m in relevantDistinguishingMappings])
+        averageStrength = total_strength / numberOfConceptMappings
         if numberOfConceptMappings == 1.0:
             numberOfConceptMappingsFactor = 0.8
         elif numberOfConceptMappings == 2.0:
@@ -124,10 +124,10 @@ class Correspondence(WorkspaceStructure):
         else:
             internalCoherenceFactor = 1.0
         internalStrength = averageStrength * internalCoherenceFactor * numberOfConceptMappingsFactor
-        self.internalStrength = min(internalStrength, 100.0)
+        self.internal_strength = min(internalStrength, 100.0)
 
-    def updateExternalStrength(self):
-        self.externalStrength = self.support()
+    def update_external_strength(self):
+        self.external_strength = self.support()
 
     def internallyCoherent(self):
         """Whether any pair of relevant distinguishing mappings support each other"""

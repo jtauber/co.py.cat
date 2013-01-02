@@ -156,7 +156,7 @@ class Group(WorkspaceObject):
         if self.rightBond:
             self.rightBond.breakBond()
 
-    def updateInternalStrength(self):
+    def update_internal_strength(self):
         relatedBondAssociation = self.groupCategory.getRelatedNode(slipnet.bondCategory).degreeOfAssociation()
         bondWeight = relatedBondAssociation ** 0.98
         length = len(self.objectList)
@@ -170,13 +170,13 @@ class Group(WorkspaceObject):
             lengthFactor = 90.0
         lengthWeight = 100.0 - bondWeight
         weightList = ((relatedBondAssociation, bondWeight), (lengthFactor, lengthWeight))
-        self.internalStrength = formulas.weightedAverage(weightList)
+        self.internal_strength = formulas.weightedAverage(weightList)
 
-    def updateExternalStrength(self):
+    def update_external_strength(self):
         if self.spansString():
-            self.externalStrength = 100.0
+            self.external_strength = 100.0
         else:
-            self.externalStrength = self.localSupport()
+            self.external_strength = self.localSupport()
 
     def localSupport(self):
         numberOfSupporters = self.numberOfLocalSupportingGroups()

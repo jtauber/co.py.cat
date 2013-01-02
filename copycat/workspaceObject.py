@@ -69,10 +69,10 @@ class WorkspaceObject(WorkspaceStructure):
         if self.spansString():
             return 100.0
         if self.group:
-            return self.group.totalStrength
+            return self.group.total_strength
         bondStrength = 0.0
         for bond in self.bonds:
-            bondStrength += bond.totalStrength
+            bondStrength += bond.total_strength
         divisor = 6.0
         if self.spansString():  # XXX then we have already returned
             divisor = 3.0
@@ -101,7 +101,7 @@ class WorkspaceObject(WorkspaceStructure):
 
         interStringHappiness = 0.0
         if self.correspondence:
-            interStringHappiness = self.correspondence.totalStrength
+            interStringHappiness = self.correspondence.total_strength
         self.interStringUnhappiness = 100.0 - interStringHappiness
         #logging.info("Unhappy: %s"%self.interStringUnhappiness)
 

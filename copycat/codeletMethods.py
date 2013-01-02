@@ -58,10 +58,10 @@ def __allOppositeMappings(mappings):
 
 
 def __structureVsStructure(structure1, weight1, structure2, weight2):
-    structure1.updateStrength()
-    structure2.updateStrength()
-    weightedStrength1 = temperatureAdjustedValue(structure1.totalStrength * weight1)
-    weightedStrength2 = temperatureAdjustedValue(structure2.totalStrength * weight2)
+    structure1.update_strength()
+    structure2.update_strength()
+    weightedStrength1 = temperatureAdjustedValue(structure1.total_strength * weight1)
+    weightedStrength2 = temperatureAdjustedValue(structure2.total_strength * weight2)
     rhs = (weightedStrength1 + weightedStrength2) * random.random()
     logging.info('%d > %d' % (weightedStrength1, rhs))
     return weightedStrength1 > rhs
@@ -116,7 +116,7 @@ def breaker():
             breakObjects += [structure.source.group]
     # try to break all objects
     for structure in breakObjects:
-        breakProbability = temperatureAdjustedProbability(structure.totalStrength / 100.0)
+        breakProbability = temperatureAdjustedProbability(structure.total_strength / 100.0)
         if coinFlip(breakProbability):
             return
     for structure in breakObjects:
@@ -154,8 +154,8 @@ def top_down_description_scout(codelet):
 def description_strength_tester(codelet):
     description = codelet.arguments[0]
     description.descriptor.buffer = 100.0
-    description.updateStrength()
-    strength = description.totalStrength
+    description.update_strength()
+    strength = description.total_strength
     probability = temperatureAdjustedProbability(strength / 100.0)
     assert formulas.coinFlip(probability)
     coderack.newCodelet('description-builder', codelet, strength)
@@ -249,10 +249,10 @@ def rule_scout(codelet):
 
 def rule_strength_tester(codelet):
     rule = codelet.arguments[0]
-    rule.updateStrength()
-    probability = temperatureAdjustedProbability(rule.totalStrength / 100.0)
+    rule.update_strength()
+    probability = temperatureAdjustedProbability(rule.total_strength / 100.0)
     assert random.random() <= probability
-    coderack.newCodelet('rule-builder', codelet, rule.totalStrength, rule)
+    coderack.newCodelet('rule-builder', codelet, rule.total_strength, rule)
 
 
 def replacement_finder():
@@ -325,8 +325,8 @@ def top_down_bond_scout__direction(codelet):
 def bond_strength_tester(codelet):
     bond = codelet.arguments[0]
     __showWhichStringObjectIsFrom(bond)
-    bond.updateStrength()
-    strength = bond.totalStrength
+    bond.update_strength()
+    strength = bond.total_strength
     probability = temperatureAdjustedProbability(strength / 100.0)
     logging.info('bond strength = %d for %s' % (strength, bond))
     assert formulas.coinFlip(probability)
@@ -340,7 +340,7 @@ def bond_strength_tester(codelet):
 def bond_builder(codelet):
     bond = codelet.arguments[0]
     __showWhichStringObjectIsFrom(bond)
-    bond.updateStrength()
+    bond.update_strength()
     assert (bond.source in workspace.objects or bond.destination in workspace.objects)
     for stringBond in bond.string.bonds:
         if bond.sameNeighbours(stringBond) and bond.sameCategories(stringBond):
@@ -567,8 +567,8 @@ def group_strength_tester(codelet):
     # update strength value of the group
     group = codelet.arguments[0]
     __showWhichStringObjectIsFrom(group)
-    group.updateStrength()
-    strength = group.totalStrength
+    group.update_strength()
+    strength = group.total_strength
     probability = temperatureAdjustedProbability(strength / 100.0)
     assert random.random() <= probability
     # it is strong enough - post builder  & activate nodes
@@ -613,7 +613,7 @@ def group_builder(codelet):
                     incompatibleBonds += [rightBond]
             next = objekt
     # if incompatible bonds exist - fight
-    group.updateStrength()
+    group.update_strength()
     assert __fightIncompatibles(incompatibleBonds, group, 'bonds', 1.0, 1.0)
     # fight incompatible groups
     # fight all groups containing these objects
@@ -651,8 +651,8 @@ def rule_builder(codelet):
     if rule.ruleEqual(workspace.rule):
         rule.activateRuleDescriptions()
         return
-    rule.updateStrength()
-    assert rule.totalStrength
+    rule.update_strength()
+    assert rule.total_strength
     # fight against other rules
     if workspace.rule:
         assert __structureVsStructure(rule, 1.0, workspace.rule, 1.0)
@@ -763,8 +763,8 @@ def correspondence_strength_tester(codelet):
     objectFromInitial = correspondence.objectFromInitial
     objectFromTarget = correspondence.objectFromTarget
     assert objectFromInitial in workspace.objects and (objectFromTarget in workspace.objects or correspondence.flipTargetObject and not workspace.target.equivalentGroup(objectFromTarget.flipped_version()))
-    correspondence.updateStrength()
-    strength = correspondence.totalStrength
+    correspondence.update_strength()
+    strength = correspondence.total_strength
     probability = temperatureAdjustedProbability(strength / 100.0)
     assert random.random() <= probability
     # activate some concepts

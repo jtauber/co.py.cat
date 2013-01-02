@@ -91,7 +91,7 @@ class Bond(WorkspaceStructure):
                     incompatibles += [correspondence]
         return incompatibles
 
-    def updateInternalStrength(self):
+    def update_internal_strength(self):
         # bonds between objects of same type(ie. letter or group) are
         # stronger than bonds between different types
         sourceGap = self.get_source().leftStringPosition != self.get_source().rightStringPosition
@@ -106,10 +106,10 @@ class Bond(WorkspaceStructure):
         else:
             facetFactor = 0.7
         strength = min(100.0, memberCompatibility * facetFactor * self.category.bondDegreeOfAssociation())
-        self.internalStrength = strength
+        self.internal_strength = strength
 
-    def updateExternalStrength(self):
-        self.externalStrength = 0.0
+    def update_external_strength(self):
+        self.external_strength = 0.0
         supporters = self.numberOfLocalSupportingBonds()
         if supporters > 0.0:
             density = self.localDensity() / 100.0
@@ -117,7 +117,7 @@ class Bond(WorkspaceStructure):
             supportFactor = 0.6 ** (1.0 / supporters ** 3)
             supportFactor = max(1.0, supportFactor)
             strength = supportFactor * density
-            self.externalStrength = strength
+            self.external_strength = strength
 
     def numberOfLocalSupportingBonds(self):
         return len([b for b in self.string.bonds if b.string == self.get_source().string and

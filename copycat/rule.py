@@ -17,12 +17,12 @@ class Rule(WorkspaceStructure):
             return 'Empty rule'
         return 'replace %s of %s %s by %s' % (self.facet.name, self.descriptor.name, self.category.name, self.relation.name)
 
-    def updateExternalStrength(self):
-        self.externalStrength = self.internalStrength
+    def update_external_strength(self):
+        self.external_strength = self.internal_strength
 
-    def updateInternalStrength(self):
+    def update_internal_strength(self):
         if not (self.descriptor and self.relation):
-            self.internalStrength = 0.0
+            self.internal_strength = 0.0
             return
         averageDepth = (self.descriptor.conceptualDepth + self.relation.conceptualDepth) / 2.0
         averageDepth **= 1.1
@@ -37,15 +37,15 @@ class Rule(WorkspaceStructure):
             slippages = workspace.slippages()
             slipnode = self.descriptor.applySlippages(slippages)
             if not targetObject.hasDescription(slipnode):
-                self.internalStrength = 0.0
+                self.internal_strength = 0.0
                 return
             sharedDescriptorTerm = 100.0
         sharedDescriptorWeight = ((100.0 - self.descriptor.conceptualDepth) / 10.0) ** 1.4
         depthDifference = 100.0 - abs(self.descriptor.conceptualDepth - self.relation.conceptualDepth)
         weights = ((depthDifference, 12), (averageDepth, 18), (sharedDescriptorTerm, sharedDescriptorWeight))
-        self.internalStrength = weightedAverage(weights)
-        if self.internalStrength > 100.0:
-            self.internalStrength = 100.0
+        self.internal_strength = weightedAverage(weights)
+        if self.internal_strength > 100.0:
+            self.internal_strength = 100.0
 
     def ruleEqual(self, other):
         if not other:

@@ -132,7 +132,7 @@ class CodeRack(object):
         from rule import Rule
 
         rule = Rule(facet, description, category, relation)
-        rule.updateStrength()
+        rule.update_strength()
         if description and relation:
             depths = description.conceptualDepth + relation.conceptualDepth
             depths /= 200.0

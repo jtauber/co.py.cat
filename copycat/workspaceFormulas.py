@@ -15,8 +15,8 @@ class WorkspaceFormulas(object):
         workspace.assessTemperature()
         ruleWeakness = 100.0
         if workspace.rule:
-            workspace.rule.updateStrength()
-            ruleWeakness = 100.0 - workspace.rule.totalStrength
+            workspace.rule.update_strength()
+            ruleWeakness = 100.0 - workspace.rule.total_strength
         values = ((workspace.totalUnhappiness, 0.8), (ruleWeakness, 0.2))
         slightly_above_actual_temperature = formulas.actualTemperature + 0.001
         logging.info('actualTemperature: %f' % slightly_above_actual_temperature)
@@ -128,7 +128,7 @@ def probabilityOfPosting(codeletName):
     if 'rule' in codeletName:
         if not workspace.rule:
             return 1.0
-        return workspace.rule.totalWeakness() / 100.0
+        return workspace.rule.total_weakness() / 100.0
     if 'translator' in codeletName:
         if not workspace.rule:
             assert 0

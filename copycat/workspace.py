@@ -69,7 +69,7 @@ class Workspace(object):
 
     def updateEverything(self):
         for structure in self.structures:
-            structure.updateStrength()
+            structure.update_strength()
         for obj in self.objects:
             obj.updateValue()
         self.initial.updateRelativeImportance()
