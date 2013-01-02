@@ -128,7 +128,7 @@ def probabilityOfPosting(codeletName):
     if 'rule' in codeletName:
         if not workspace.rule:
             return 1.0
-        return workspace.rule.total_weakness() / 100.0
+        return workspace.rule.total_weakness / 100.0
     if 'translator' in codeletName:
         if not workspace.rule:
             assert 0
