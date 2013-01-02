@@ -22,17 +22,3 @@ class WorkspaceStructure(object):
     def totalWeakness(self):
         """The total weakness is derived from total strength"""
         return 100 - self.totalStrength ** 0.95
-
-    def updateInternalStrength(self):
-        """How internally cohesive the structure is"""
-        raise NotImplementedError('call of abstract method: WorkspaceStructure.updateInternalStrength()')
-
-    def updateExternalStrength(self):
-        raise NotImplementedError('call of abstract method: WorkspaceStructure.updateExternalStrength()')
-
-    def break_the_structure(self):
-        """Break this workspace structure
-
-        Exactly what is broken depends on sub-class
-        """
-        raise NotImplementedError('call of abstract method: WorkspaceStructure.break_the_structure()')
