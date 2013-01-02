@@ -17,7 +17,7 @@ class WorkspaceStructure(object):
         """
         self.total_strength = (self.internal_strength * self.internal_strength +
              self.external_strength * (100 - self.internal_strength)) / 100
-    
+
     @property
     def total_weakness(self):
         """
