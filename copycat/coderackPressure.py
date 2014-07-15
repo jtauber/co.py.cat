@@ -51,7 +51,7 @@ class CoderackPressures(object):
         totalValue = sum(values)
         if not totalValue:
             totalValue = 1.0
-        values = [value / totalValue for value in values]
+        values = [val / totalValue for val in values]
         self.maxValue = max(values)
         for pressure, value in zip(self.pressures, values):
             pressure.values += [value * 100.0]

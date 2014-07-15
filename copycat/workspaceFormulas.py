@@ -22,7 +22,7 @@ class WorkspaceFormulas(object):
         logging.info('actualTemperature: %f' % slightly_above_actual_temperature)
         formulas.actualTemperature = formulas.weightedAverage(values)
         logging.info('unhappiness: %f, weakness: %f, actualTemperature: %f' % (
-        workspace.totalUnhappiness + 0.001, ruleWeakness + 0.001, formulas.actualTemperature + 0.001))
+            workspace.totalUnhappiness + 0.001, ruleWeakness + 0.001, formulas.actualTemperature + 0.001))
         if temperature.clamped:
             formulas.actualTemperature = 100.0
         logging.info('actualTemperature: %f' % (formulas.actualTemperature + 0.001))
@@ -79,8 +79,9 @@ def __chooseLeftNeighbor(source):
 
 
 def __chooseRightNeighbor(source):
-    objects = [o for o in workspace.objects if
-        o.string == source.string and
+    objects = [
+        o for o in workspace.objects
+        if o.string == source.string and
         o.leftStringPosition == source.rightStringPosition + 1
     ]
     return formulas.chooseObjectFromList(objects, 'intraStringSalience')

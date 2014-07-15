@@ -61,7 +61,7 @@ class WorkspaceString(object):
         else:
             for o in self.objects:
                 logging.info('object: %s, relative: %d = raw: %d / total: %d' % (
-                o, o.relativeImportance * 1000, o.rawImportance, total))
+                    o, o.relativeImportance * 1000, o.rawImportance, total))
                 o.relativeImportance = o.rawImportance / total
 
     def updateIntraStringUnhappiness(self):

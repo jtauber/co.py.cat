@@ -31,8 +31,8 @@ class Bond(WorkspaceStructure):
 
         """
         return Bond(
-                self.destination, self.get_source(), self.category.getRelatedNode(slipnet.opposite),
-                self.facet, self.destinationDescriptor, self.sourceDescriptor
+            self.destination, self.get_source(), self.category.getRelatedNode(slipnet.opposite),
+            self.facet, self.destinationDescriptor, self.sourceDescriptor
         )
 
     def __repr__(self):
@@ -120,11 +120,14 @@ class Bond(WorkspaceStructure):
             self.external_strength = strength
 
     def numberOfLocalSupportingBonds(self):
-        return len([b for b in self.string.bonds if b.string == self.get_source().string and
+        return len([
+            b for b in self.string.bonds
+            if b.string == self.get_source().string and
             self.leftObject.letterDistance(b.leftObject) != 0 and
             self.rightObject.letterDistance(b.rightObject) != 0 and
             self.category == b.category and
-            self.directionCategory == b.directionCategory])
+            self.directionCategory == b.directionCategory
+        ])
 
     def sameCategories(self, other):
         return self.category == other.category and self.directionCategory == other.directionCategory

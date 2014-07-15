@@ -13,7 +13,7 @@ def jump_threshold():
 
 class Slipnode(object):
     def __init__(self, name, depth, length=0.0):
-    #       logging.info('depth to %s for %s' % (depth,name))
+        # logging.info('depth to %s for %s' % (depth,name))
         self.conceptualDepth = depth
         self.usualConceptualDepth = depth
         self.name = name

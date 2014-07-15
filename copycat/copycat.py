@@ -1,10 +1,10 @@
 import logging
 logging.basicConfig(
-        level=logging.INFO,
-        #format='%(asctime)s %(filename)s:%(lineno)d %(message)s',
-        format='%(message)s',
-        filename='./copycat.log',
-        filemode='w'
+    level=logging.INFO,
+    #format='%(asctime)s %(filename)s:%(lineno)d %(message)s',
+    format='%(message)s',
+    filename='./copycat.log',
+    filemode='w'
 )
 
 

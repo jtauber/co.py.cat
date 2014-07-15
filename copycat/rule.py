@@ -113,9 +113,11 @@ class Rule(WorkspaceStructure):
         self.relation = self.relation.applySlippages(slippages)
         # generate the final string
         self.finalAnswer = workspace.targetString
-        changeds = [o for o in workspace.target.objects if
-            o.hasDescription(self.descriptor) and
-            o.hasDescription(self.category)]
+        changeds = [
+            o for o in workspace.target.objects
+            if o.hasDescription(self.descriptor) and
+            o.hasDescription(self.category)
+        ]
         changed = changeds and changeds[0] or None
         logging.debug('changed object = %s' % changed)
         if changed:

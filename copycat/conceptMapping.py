@@ -140,4 +140,3 @@ class ConceptMapping(object):
             self.initialObject,
             self.targetObject
         )
-

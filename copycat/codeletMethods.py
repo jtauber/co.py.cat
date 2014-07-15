@@ -103,10 +103,12 @@ def breaker():
     probabilityOfFizzle = (100.0 - Temperature) / 100.0
     assert not coinFlip(probabilityOfFizzle)
     # choose a structure at random
-    structures = [s for s in workspace.structures if
-                            isinstance(s, Group) or
-                            isinstance(s, Bond) or
-                            isinstance(s, Correspondence)]
+    structures = [
+        s for s in workspace.structures
+        if isinstance(s, Group) or
+        isinstance(s, Bond) or
+        isinstance(s, Correspondence)
+    ]
     assert len(structures)
     structure = random.choice(structures)
     __showWhichStringObjectIsFrom(structure)
@@ -711,9 +713,11 @@ def bottom_up_correspondence_scout(codelet):
     assert distinguishingMappings
     # if both objects span the strings, check to see if the
     # string description needs to be flipped
-    oppositeMappings = [m for m in distinguishingMappings
-            if m.initialDescriptionType == slipnet.stringPositionCategory and
-            m.initialDescriptionType != slipnet.bondFacet]
+    oppositeMappings = [
+        m for m in distinguishingMappings
+        if m.initialDescriptionType == slipnet.stringPositionCategory and
+        m.initialDescriptionType != slipnet.bondFacet
+    ]
     initialDescriptionTypes = [m.initialDescriptionType for m in oppositeMappings]
     flipTargetObject = False
     if objectFromInitial.spansString() and objectFromTarget.spansString() and slipnet.directionCategory in initialDescriptionTypes and __allOppositeMappings(oppositeMappings) and slipnet.opposite.activation != 100.0:

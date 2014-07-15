@@ -62,7 +62,7 @@ class Workspace(object):
     def calculateTotalUnhappiness(self):
         for o in self.objects:
             logging.info("object: %s, totalUnhappiness: %d, relativeImportance: %d" % (
-            o, o.totalUnhappiness, o.relativeImportance * 1000))
+                o, o.totalUnhappiness, o.relativeImportance * 1000))
         values = [o.relativeImportance * o.totalUnhappiness for o in self.objects]
         value = sum(values) / 2.0
         self.totalUnhappiness = min(value, 100.0)
